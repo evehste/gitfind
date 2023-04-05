@@ -1,10 +1,9 @@
-input{
-    width: 85%;
+button{
     margin-right: 12px;
     padding: 10px;
     border-radius: 22px;
     border: 1px solid #999;
-    background-color: transparent;
+    background-color: #2D333B;
     font-size: 18px;
     color: #fff;
 }

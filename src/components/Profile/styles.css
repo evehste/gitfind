@@ -1,0 +1,30 @@
+.profile{
+    display: flex;
+    margin: 40px 0;
+    color: #fff;
+    font-family: 'Roboto, Arial';
+}
+
+.profile img.imgProfile{
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
+    border: 2px solid #E5E5E5;
+    margin-right: 32px;
+}
+
+.profile h3 {
+    font-size: 26px;
+    margin: 0;
+}
+
+.profile p {
+    font-size: 18px;
+    margin: 20px 0 0 0;
+}
+
+.profile span {
+    display: block;
+    font-size: 18px;
+    margin: 0;
+}

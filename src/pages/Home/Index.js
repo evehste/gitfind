@@ -2,18 +2,20 @@ import { useState } from 'react';
 import './styles.css';
 import Header from "../../components/Header";
 import background from "../../assets/background.png";
-import ItemList from '../../components/ItemList';
+import Profile from '../../components/Profile';
+import Repos from '../../components/Repos';
+import InputUser from '../../components/Input/Index';
+import Button from '../../components/Button/Index';
 
-function App() {
+const App = () => {
 
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState("evehste");
   const [currentUser, setCurrentUser] = useState(null);
   const [repos, setRepos] = useState(null);
 
   const handleGetData = async () => {
     const userData = await fetch(`https://api.github.com/users/${user}`);
     const newUser = await userData.json();
-    console.log(newUser)
 
     if(newUser.login){
       const { avatar_url, name, bio, login } = newUser;
@@ -24,7 +26,6 @@ function App() {
     const newRepos = await reposData.json();
 
     if(newRepos.length){
-      console.log(newRepos)
       setRepos(newRepos);
     }
   }
@@ -36,47 +37,17 @@ function App() {
         <img className="background" src={background} alt="" />
         <div className="info">
           <div>
-            <input 
-              name="usuario" 
-              placeholder="@username" 
-              value={user} 
-              onChange={event => setUser(event.target.value)}
-            />
-            <button onClick={handleGetData}>Buscar</button>
+            <InputUser user={user} setUser={setUser}/>
+            <Button action={handleGetData} title={'Buscar'} />
           </div>
 
-          {
-            currentUser?.login ? (
-              <>
-                <div className="profile">
-                  <img className="imgProfile" src={currentUser.avatar_url} alt=""/>
-
-                  <div>
-                    <h3>{currentUser.name}</h3>
-                    <span>@{currentUser.login}</span>
-                    <p>{currentUser.bio}</p>
-                  </div>
-                </div>
-                <hr />
-              </>
-            ): null
+          { 
+            currentUser?.login && <Profile data={currentUser}/>
           }
 
-
           {
-            repos?.length ? (
-              <>
-                <div>
-                  <h4 className="repository">Repositórios</h4>
-                </div>
-                {
-                  repos.map((item, i) => <ItemList title={item.name} description={item.description} key={i} />)
-                }
-              </>
-            ) : null
+            repos?.length && <Repos data={repos}/>
           }
-
-
         </div>
       </div>
     </div>
